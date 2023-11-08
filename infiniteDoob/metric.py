@@ -18,8 +18,8 @@
 #
 
 
-from src.setup import *
-from src.utils import *
+from infiniteDoob.setup import *
+from infiniteDoob.utils import *
 
 def initialize(M,truncate_high_order_derivatives=False):
     """ add metric related structures to manifold """

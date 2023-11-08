@@ -18,13 +18,13 @@
 #
 
 
-from src.setup import *
-from src.params import *
-from src.plotting import *
+from infiniteDoob.setup import *
+from infiniteDoob.params import *
+from infiniteDoob.plotting import *
 
-from src.manifolds.manifold import *
+from infiniteDoob.manifold import *
 
-class landmarks(Manifold):
+class Landmarks(Manifold):
     """ LDDMM landmark manifold """
 
     def get_B(self,q):

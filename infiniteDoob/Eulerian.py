@@ -17,8 +17,8 @@
 # along with Jax Geometry. If not, see <http://www.gnu.org/licenses/>.
 #
 
-from src.setup import *
-from src.utils import *
+from infiniteDoob.setup import *
+from infiniteDoob.utils import *
 
 ###############################################################
 # Eulerian / stochastic EPDiff acting on landmarks

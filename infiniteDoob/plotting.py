@@ -27,8 +27,8 @@ import matplotlib.ticker as ticker
 plt.rcParams['figure.figsize'] = 15,12
 #plt.rcParams['figure.dpi'] = 200
 
-from src.setup import * 
-from src.utils import * 
+from infiniteDoob.setup import * 
+from infiniteDoob.utils import * 
 
 ############################
 #various plotting functions#

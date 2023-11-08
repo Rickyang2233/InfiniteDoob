@@ -18,27 +18,18 @@
 #
 
 
-import warnings
-warnings.simplefilter(action='ignore', category=FutureWarning)
+from infiniteDoob.setup import *
 
-import numpy as np
-import scipy
+##########################################################################
+# this file contains various object definitions, and standard parameters #
+##########################################################################
 
-import jax
-import jax.numpy as jnp
-from jax import lax
-from jax import grad, jacfwd, jacrev, jit, vmap
-from jax import random
-from jax.scipy import optimize
+# default integration times and time steps
+T = 1.
+n_steps = 100
 
-from functools import partial
+# Integrator variables:
+default_method = 'euler'
+#default_method = 'rk4'
 
-from infiniteDoob.utils import *
-
-import time
-
-from infiniteDoob.params import *
-
-import itertools
-from functools import partial
 

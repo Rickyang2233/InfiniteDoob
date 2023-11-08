@@ -17,8 +17,8 @@
 # along with Jax Geometry. If not, see <http://www.gnu.org/licenses/>.
 #
 
-from src.setup import *
-from src.params import *
+from infiniteDoob.setup import *
+from infiniteDoob.params import *
 
 import matplotlib.pyplot as plt
 
