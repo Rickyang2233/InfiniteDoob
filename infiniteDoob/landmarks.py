@@ -24,7 +24,7 @@ from infiniteDoob.plotting import *
 
 from infiniteDoob.manifold import *
 
-class Landmarks(Manifold):
+class LandmarkManifold(Manifold):
     """ LDDMM landmark manifold """
 
     def get_B(self,q):
