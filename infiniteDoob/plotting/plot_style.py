@@ -11,5 +11,3 @@ def set_style():
     plt.rcParams.update(axes.lines())
     plt.rcParams.update(axes.spines(top=False, right=False))
 
-
-
