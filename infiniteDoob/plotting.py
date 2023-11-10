@@ -24,15 +24,17 @@ from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import cm
 import matplotlib.ticker as ticker
 
-plt.rcParams['figure.figsize'] = 15,12
-#plt.rcParams['figure.dpi'] = 200
 
 from infiniteDoob.setup import * 
-from infiniteDoob.utils import * 
+from infiniteDoob.utils import *
+
+from infiniteDoob.plotting import plot_style
 
 ############################
 #various plotting functions#
 ############################
+
+plot_style.set_style()
 
 def newfig2d(nrows=1,ncols=1,plot_number=1,new_figure=True):
     if new_figure:
