@@ -23,16 +23,20 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import cm
 import matplotlib.ticker as ticker
+from tueplots import figsizes
 
-plt.rcParams['figure.figsize'] = 15,12
-#plt.rcParams['figure.dpi'] = 200
 
 from infiniteDoob.setup import * 
-from infiniteDoob.utils import * 
+from infiniteDoob.utils import *
+
+from infiniteDoob.plotting import plot_style
 
 ############################
 #various plotting functions#
 ############################
+
+plot_style.set_style()
+
 
 def newfig2d(nrows=1,ncols=1,plot_number=1,new_figure=True):
     if new_figure:
@@ -41,6 +45,7 @@ def newfig2d(nrows=1,ncols=1,plot_number=1,new_figure=True):
         fig = plt.gcf()
     plt.axis("equal")
     return (fig)
+
 def newfig3d(nrows=1,ncols=1,plot_number=1,new_figure=True):
     if new_figure:
         fig = plt.figure()
@@ -52,10 +57,12 @@ def newfig3d(nrows=1,ncols=1,plot_number=1,new_figure=True):
     return (fig,ax)
 newfig = newfig3d # default
 
+
 ##### plot density estimation using embedding space metric
 # adapted from http://scikit-learn.org/stable/auto_examples/neighbors/plot_species_kde.html
 from sklearn.neighbors import KernelDensity
 from scipy.optimize import minimize
+
 
 def plot_density_estimate(M, obss, alpha=.2, limits=None, border=1.5, bandwidth=0.08, pts=100, cmap = cm.jet, colorbar=True):
     if obss.shape[1] > M.dim.eval():
@@ -230,3 +237,55 @@ def plot_Euclidean_density_estimate(obss, alpha=.2, view='2D', limits=None, bord
             if colorbar:
                 plt.colorbar(m, shrink=0.7)
             ax.set_xlim3d(minx,maxx), ax.set_ylim3d(miny,maxy), ax.set_zlim3d(0,np.max(fs))
+
+
+def plot_butterfly_processes():
+    from infiniteDoob.process_data import butterfly_processing
+    fig, ax = plt.subplots()
+    ax.plot(*butterfly_processing.butterfly1_pts(), linewidth=1, alpha=0.75)
+    ax.plot(*butterfly_processing.butterfly2_pts(), linewidth=1, alpha=0.75)
+    ax.set_xticks((0., 0.5, 1.))
+    ax.set_yticks((0., 0.5, 1.))
+    plt.savefig("butterfly_grid.pdf", dpi=150)
+    plt.show()
+
+
+def plot_score_grid():
+    from infiniteDoob.process_data import butterfly_processing
+    pts = butterfly_processing.butterfly1_pts()
+    X = np.arange(0, 1, 0.1)
+    Y = np.arange(0, 1, 0.1)
+    U, V = np.meshgrid(X, Y)
+
+    fig, axs = plt.subplots(nrows=3, ncols=4, sharex=True, sharey=True)
+
+    axs[0, -1].set_ylabel("$N=10$", rotation=270, labelpad=10)
+    axs[0, -1].yaxis.set_label_position("right")
+    axs[0, 0].set_ylabel("$y$-coordinate", fontsize="medium")
+
+    axs[1, -1].set_ylabel("$N=100$", rotation=270, labelpad=10)
+    axs[1, -1].yaxis.set_label_position("right")
+    axs[1, 0].set_ylabel("$y$-coordinate", fontsize="medium")
+
+    axs[2, -1].set_ylabel("$N=1000$", rotation=270, labelpad=10)
+    axs[2, -1].yaxis.set_label_position("right")
+    axs[2, 0].set_ylabel("$y$-coordinate", fontsize="medium")
+
+    axs[2, 0].set_xlabel("$x$-coordinate", fontsize="medium")
+    axs[2, 1].set_xlabel("$x$-coordinate", fontsize="medium")
+    axs[2, 2].set_xlabel("$x$-coordinate", fontsize="medium")
+    axs[2, 3].set_xlabel("$x$-coordinate", fontsize="medium")
+
+    for i, a in enumerate(axs[0]):
+        a.set_title(f"Time $t={i}$", fontsize="medium")
+
+    for a in axs.flatten():
+        a.set_xticks((0., 0.5, 1.))
+        a.set_yticks((0., 0.5, 1.))
+        a.plot(*pts)
+        q = a.quiver(X, Y, U, V, alpha=0.6)
+
+    fig.align_ylabels()
+    fig.align_xlabels()
+    plt.savefig("butterfly_grid.pdf", dpi=150)
+    plt.show()
